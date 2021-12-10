@@ -274,6 +274,18 @@ namespace TodoApp.Controllers
                         }
                     };
                 }
+                
+                // Validation 8 - validate stored token expiry date
+                if (storedToken.ExpiryDate < DateTime.UtcNow)
+                {
+                    return new AuthResult()
+                    {
+                        Success = false,
+                        Errors = new List<string>() {
+                            "Refresh token has expired"
+                        }
+                    };
+                }
 
                 // update current token 
 
